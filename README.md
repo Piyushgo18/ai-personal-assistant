@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🤖 AI Personal Assistant Platform
 
-## Getting Started
+A sophisticated, multi-provider AI assistant platform built with Next.js 15, TypeScript, and real-time database capabilities. Create, manage, and interact with up to 10 personalized AI assistants, each with unique roles and specialized knowledge domains.
 
-First, run the development server:
+![AI Personal Assistant](https://img.shields.io/badge/AI-Personal%20Assistant-blue?style=for-the-badge&logo=openai)
+![Next.js](https://img.shields.io/badge/Next.js-15.3.5-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
+![Convex](https://img.shields.io/badge/Database-Convex-orange?style=for-the-badge)
+
+## ✨ Key Features
+
+- **🤖 Multi-Provider AI**: Google Gemini 1.5 Flash & Groq Llama 3.1 integration
+- **👥 Custom Assistants**: Create up to 10 personalized AI assistants with unique roles
+- **💬 Real-time Chat**: Smooth, responsive chat interface with message streaming
+- **🔐 Secure Auth**: Google OAuth integration with session management
+- **💳 Subscription System**: Razorpay payment integration with credit management
+- **📱 Responsive Design**: Mobile-first approach with hamburger menu for mobile
+- **🎨 Modern UI**: Dark theme with animated backgrounds and toast notifications
+- **⚡ Smart Limits**: Progressive warning system for assistant creation limits
+
+## 🛠️ Tech Stack
+
+**Frontend:** Next.js 15.3.5, TypeScript, Tailwind CSS, Radix UI, shadcn/ui  
+**Backend:** Convex (Real-time Database), Next.js API Routes  
+**AI Providers:** Google Gemini, Groq  
+**Authentication:** Google OAuth  
+**Payments:** Razorpay  
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+
+- Google OAuth credentials
+- Convex account
+- AI provider API keys (Google, Groq)
+
+### Installation
 
 ```bash
+# Clone repository
+git clone https://github.com/yourusername/ai-personal-assistant.git
+cd ai-personal-assistant
+
+# Install dependencies
+npm install
+
+# Set up environment variables (copy .env.example to .env.local)
+cp .env.example .env.local
+
+# Initialize Convex
+npx convex dev
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create `.env.local` file:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+# Convex
+CONVEX_DEPLOYMENT=your_convex_deployment_url
+NEXT_PUBLIC_CONVEX_URL=your_public_convex_url
 
-## Learn More
+# Google OAuth
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
 
-To learn more about Next.js, take a look at the following resources:
+# AI Providers
+GOOGLE_API_KEY=your_google_gemini_api_key
+GROQ_API_KEY=your_groq_api_key
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Razorpay (Optional)
+NEXT_PUBLIC_RAZORPAY_LIVE_KEY=your_razorpay_key
+RAZORPAY_SECRET=your_razorpay_secret
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Project Structure
 
-## Deploy on Vercel
+```
+ai-personal-assistant/
+├── app/                     # Next.js app directory
+│   ├── (auth)/sign-in/     # Authentication
+│   ├── (main)/             # Main application
+│   └── api/                # API routes
+├── components/ui/          # UI components
+├── convex/                 # Database functions
+├── context/                # React contexts
+└── services/               # External services
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎮 Usage
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Sign in** with Google account
+2. **Create assistants** with custom roles and instructions
+3. **Chat** with your personalized AI assistants
+4. **Manage** assistants via sidebar (mobile: hamburger menu)
+5. **Upgrade** to Pro for more credits (optional)
+
+## 🚀 Deployment
+
+**Vercel (Recommended):**
+1. Connect repository to Vercel
+2. Set environment variables in dashboard
+3. Deploy automatically on git push
+
+**Manual:**
+```bash
+npm run build
+npm start
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Vercel** for Next.js framework
+- **Convex** for real-time backend infrastructure
+- **shadcn/ui** for beautiful UI components
+
+---
+
+<div align="center">
+  <strong>Built with ❤️ using Next.js and AI</strong>
+</div>
