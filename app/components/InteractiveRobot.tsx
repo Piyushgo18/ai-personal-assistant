@@ -7,8 +7,11 @@ export default function InteractiveRobot() {
   const [robotState, setRobotState] = useState('idle');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+    
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -35,6 +38,10 @@ export default function InteractiveRobot() {
   }, []);
 
   const getEyeDirection = () => {
+    if (!isMounted || typeof document === 'undefined') {
+      return { x: 0, y: 0 };
+    }
+    
     const robotElement = document.querySelector('.robot-container');
     if (!robotElement) return { x: 0, y: 0 };
     
@@ -76,6 +83,10 @@ export default function InteractiveRobot() {
         return isHovered ? "Hi there! 👋" : "AI Assistant";
     }
   };
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <div className="fixed bottom-8 right-8 z-50">
