@@ -54,20 +54,21 @@ export async function POST(req: NextRequest) {
 
 // Google Gemini API Call
 async function callGemini(userInput: string, aiResp?: string) {
-    const messages = [
-        {
-            role: "user",
-            parts: [{ text: userInput }]
-        }
-    ];
+    const messages = [];
     
-    // Add previous AI response if exists
-    if (aiResp && aiResp !== 'Loading...') {
-        messages.unshift({
+    // Add previous AI response if exists (for conversation context)
+    if (aiResp && aiResp !== 'Loading...' && aiResp.trim()) {
+        messages.push({
             role: "model",
             parts: [{ text: aiResp }]
         });
     }
+    
+    // Add current user input
+    messages.push({
+        role: "user",
+        parts: [{ text: userInput }]
+    });
     
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GOOGLE_API_KEY}`, {
         method: 'POST',
@@ -103,21 +104,19 @@ async function callGemini(userInput: string, aiResp?: string) {
 async function callGroq(userInput: string, aiResp?: string) {
     const messages = [
         {
-            role: "system",
-            content: "You are a helpful AI assistant. Follow the user's instructions exactly and stay in character as described. Format your responses with proper line breaks and structure."
-        },
-        {
             role: "user",
             content: userInput
         }
     ];
     
-    // Add previous AI response if exists
-    if (aiResp && aiResp !== 'Loading...') {
-        messages.splice(1, 0, {
-            role: "assistant",
-            content: aiResp
-        });
+    // Add previous AI response if exists (for conversation context)
+    if (aiResp && aiResp !== 'Loading...' && aiResp.trim()) {
+        messages.unshift(
+            {
+                role: "assistant",
+                content: aiResp
+            }
+        );
     }
     
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
